@@ -11,7 +11,7 @@
       </span>
     </div>
     <div class="todos">
-      <div class="todo" v-for="todo in allTodos" :key="todo.id"
+      <div @dblclick="makeComplete(todo)" :class="{'is-complete' : todo.completed}" class="todo" v-for="todo in allTodos" :key="todo.id"
       >
         <h4>{{todo.title}}</h4>
         <i @click="deleteTodo(todo.id)" class="fas fa-trash-alt"></i>
@@ -30,7 +30,15 @@ export default {
 
 
   methods : {
-    ...mapActions(['fetchTodos' , 'deleteTodo']),
+    ...mapActions(['fetchTodos' , 'deleteTodo','updateTodo']),
+    makeComplete(todo){
+      const updateTodo = {
+        id : todo.id,
+        title : todo.title,
+        completed : !todo.completed
+      }
+      this.updateTodo(updateTodo);
+    }
     
   },
   computed : {

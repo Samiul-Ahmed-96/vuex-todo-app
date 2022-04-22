@@ -37,6 +37,10 @@ const actions = {
 
     commit('setTodos',responce.data)
 
+  },
+  async updateTodo({commit},updatedTodo){
+    const responce  = await Axios.put(`https://jsonplaceholder.typicode.com/todos/${updatedTodo.id}`)
+    commit('updateTodo',updatedTodo)
   }
 };
 const mutations = {
@@ -50,6 +54,12 @@ const mutations = {
   },
   removeTodo : (state,id) =>{
     state.todos = state.todos.filter( todo => todo.id != id)
+  },
+  updateTodo : (state,upTodo) =>{
+    const index = state.todos.findIndex(todo => todo.id === upTodo.id)
+    if(index !==-1){
+      state.todos.splice(index,1,upTodo);
+    }
   }
 };
 
