@@ -11,9 +11,9 @@
       </span>
     </div>
     <div class="todos">
-      <div
+      <div class="todo" v-for="todo in allTodos" :key="todo"
       >
-        {{ todo.title }}
+        {{ todo }}
         <i class="fas fa-trash-alt"></i>
       </div>
     </div>
@@ -21,10 +21,21 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+import {mapActions} from 'vuex';
 
-
+ 
 export default {
   name: "Todos",
+  methods:{
+    ...mapActions(['fetchTodos'])
+  },
+  computed: mapGetters(['allTodos']),
+  created(){
+    this.fetchTodos()
+    ;
+  }
+
   
 };
 </script>
