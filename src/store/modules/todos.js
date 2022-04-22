@@ -22,6 +22,21 @@ const actions = {
       title,completed:false
     })
     commit('newTodo', responce.data)
+  },
+  async deleteTodo({commit},id){
+    await Axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+    commit('removeTodo' , id)
+  },
+  async filterTodos({commit},e){
+    //get the limit
+
+    const limit  = parseInt(e.target.options[e.target.options.selectedIndex].innerText);
+    console.log(limit)
+
+    const responce = await Axios.get(`https://jsonplaceholder.typicode.com/todos?_limit=${limit}`)
+
+    commit('setTodos',responce.data)
+
   }
 };
 const mutations = {
@@ -32,6 +47,9 @@ const mutations = {
   },
   newTodo : (state,todo) =>{
     state.todos.unshift(todo);
+  },
+  removeTodo : (state,id) =>{
+    state.todos = state.todos.filter( todo => todo.id != id)
   }
 };
 

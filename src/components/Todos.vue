@@ -11,10 +11,10 @@
       </span>
     </div>
     <div class="todos">
-      <div class="todo" v-for="todo in allTodos" :key="todo"
+      <div class="todo" v-for="todo in allTodos" :key="todo.id"
       >
         <h4>{{todo.title}}</h4>
-        <i class="fas fa-trash-alt"></i>
+        <i @click="deleteTodo(todo.id)" class="fas fa-trash-alt"></i>
       </div>
     </div>
   </div>
@@ -30,7 +30,8 @@ export default {
 
 
   methods : {
-    ...mapActions(['fetchTodos'])
+    ...mapActions(['fetchTodos' , 'deleteTodo']),
+    
   },
   computed : {
     ...mapGetters(['allTodos'])
@@ -38,6 +39,7 @@ export default {
   created() {
 
       this.fetchTodos();
+      
     
   }
   
