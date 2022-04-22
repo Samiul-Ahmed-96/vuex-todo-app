@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+
 export default {
   name: "AddTodo",
   data() {
@@ -19,13 +19,7 @@ export default {
       title: ""
     };
   },
-  methods: {
-    ...mapActions(["addTodo"]),
-    onSubmit(e) {
-      e.preventDefault();
-      this.addTodo(this.title);
-    }
-  }
+
 };
 </script>
 
