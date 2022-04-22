@@ -13,7 +13,7 @@
     <div class="todos">
       <div class="todo" v-for="todo in allTodos" :key="todo"
       >
-        {{ todo }}
+        <h4>{{todo.title}}</h4>
         <i class="fas fa-trash-alt"></i>
       </div>
     </div>
@@ -27,15 +27,19 @@ import {mapActions} from 'vuex';
  
 export default {
   name: "Todos",
-  methods:{
+
+
+  methods : {
     ...mapActions(['fetchTodos'])
   },
-  computed: mapGetters(['allTodos']),
-  created(){
-    this.fetchTodos()
-    ;
-  }
+  computed : {
+    ...mapGetters(['allTodos'])
+  },
+  created() {
 
+      this.fetchTodos();
+    
+  }
   
 };
 </script>
